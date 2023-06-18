@@ -6,18 +6,26 @@ from selenium.webdriver.chrome.service import Service
 service_obj = Service("drivers/chromedriver_win32/chromedriver.exe")
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(service=service_obj,options=options)
+
+# this option forces selenium not to close browser after script execution
+options.add_experimental_option('detach', True)
+
+driver = webdriver.Chrome(service=service_obj, options=options)
 driver.implicitly_wait(10)
 driver.maximize_window()
 
-driver.get("https://www.selenium.dev/selenium/docs/api/java/index.html?overview-summary.html")
+driver.get(
+    "https://www.selenium.dev/selenium/docs/api/java/index.html?overview-summary.html")
 
 # switch_to.frame(name of the frame)
 # switch_to.frame(id of the frame)
 # switch_to.frame(webelement)
 # switch_to.frame(0) -> in case of a single frame
 
-# tag could be frame, iframe and form
+# tag could be:
+#   - frame
+#   - iframe
+#   - form
 
 # switch with frame name
 driver.switch_to.frame("classFrame")
