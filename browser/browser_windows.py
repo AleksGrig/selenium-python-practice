@@ -6,7 +6,10 @@ from selenium.webdriver.chrome.service import Service
 service_obj = Service("drivers/chromedriver_win32/chromedriver.exe")
 options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
-driver = webdriver.Chrome(service=service_obj,options=options)
+
+# this option forces selenium not to close browser after script execution
+options.add_experimental_option('detach', True)
+driver = webdriver.Chrome(service=service_obj, options=options)
 driver.implicitly_wait(10)
 driver.maximize_window()
 
@@ -30,4 +33,3 @@ print(driver.title)
 # switching back to parent window
 driver.switch_to.window(window_ids[0])
 print(driver.title)
-
